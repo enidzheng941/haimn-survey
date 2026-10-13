@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAIMN Member Form</title>
+<style>
+  :root {
+    --bg: #e4efe0;
+    --card: #ffffff;
+    --text: #202124;
+    --muted: #5f6368;
+    --line: #dadce0;
+    --accent: #3f8a1f;
+    --accent-dark: #2f6c15;
+    --error: #d93025;
+    --link: #1a0dab;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c2a1a;
+      --card: #26302a;
+      --text: #e8eae6;
+      --muted: #a9b2a8;
+      --line: #46524a;
+      --accent: #6fbf4a;
+      --accent-dark: #8fd46c;
+      --error: #f28b82;
+      --link: #8ab4f8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Roboto", "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+  .card.title { border-top: 10px solid var(--accent); padding-top: 22px; }
+  h1 { font-size: 2rem; font-weight: 400; margin: 0 0 8px; }
+  .intro { color: var(--muted); margin: 0 0 12px; }
+  .req-note { color: var(--error); font-size: .875rem; margin: 0; }
+  .q { font-size: 1rem; font-weight: 500; margin: 0 0 16px; padding: 0; }
+  .q .star { color: var(--error); margin-left: 4px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { padding: 0; }
+
+  input[type="text"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    padding: 8px 0;
+    outline: none;
+    transition: border-color .15s;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 7px;
+  }
+  .short { max-width: 50%; }
+  @media (max-width: 520px) { .short { max-width: 100%; } }
+
+  .opt { display: flex; align-items: center; gap: 12px; padding: 8px 0; cursor: pointer; }
+  .opt input[type="radio"] { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; flex: none; }
+  .opt .other-input { flex: 1; }
+  a { color: var(--link); }
+
+  .error-msg { display: none; color: var(--error); font-size: .8125rem; margin-top: 8px; }
+  .card.invalid { border-color: var(--error); }
+  .card.invalid .error-msg { display: block; }
+
+  .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  button {
+    font: inherit; cursor: pointer; border-radius: 4px; padding: 9px 24px; border: 0;
+  }
+  .submit { background: var(--accent); color: #fff; font-weight: 500; }
+  .submit:hover { background: var(--accent-dark); }
+  .submit:disabled { opacity: .6; cursor: default; }
+  .clear { background: transparent; color: var(--accent); font-weight: 500; }
+  .clear:hover { background: rgba(63,138,31,.08); }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer { text-align: center; color: var(--muted); font-size: .8125rem; margin-top: 32px; }
+  .success h2 { font-weight: 400; margin: 0 0 8px; }
+  .success p { margin: 0 0 16px; color: var(--muted); }
+  [hidden] { display: none !important; }
+
+  .hint { color: var(--muted); font-size: .875rem; margin: -8px 0 12px; padding-top: 4px; }
+  .file-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: transparent; color: var(--accent); font-weight: 500; }
+  .file-btn:hover { background: rgba(63,138,31,.08); }
+  .file-name { margin-left: 12px; color: var(--muted); font-size: .9rem; word-break: break-all; }
+  input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .back { display: inline-block; margin-bottom: 12px; font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">&larr; Back to the HAIMN Survey</a>
+
+  <form id="helpForm" novalidate>
+    <div class="card title">
+      <h1>HAIMN Member Form</h1>
+      <p class="intro">Tell us what you need and we will match you with the right HAIMN network.</p>
+      <p class="req-note">* Indicates required question</p>
+    </div>
+
+    <div class="card" data-required>
+      <label class="q" for="name">Name<span class="star">*</span></label>
+      <input class="short" type="text" id="name" name="name" placeholder="Your answer" autocomplete="name">
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card" data-required data-type="email">
+      <label class="q" for="email">Email<span class="star">*</span></label>
+      <input class="short" type="email" id="email" name="email" placeholder="Your answer" autocomplete="email">
+      <div class="error-msg">Please enter a valid email address</div>
+    </div>
+
+    <div class="card">
+      <label class="q" for="phone">Phone number (please provide if you need faster response)</label>
+      <input class="short" type="tel" id="phone" name="phone" placeholder="Your answer" autocomplete="tel">
+    </div>
+
+    <div class="card" data-required>
+      <label class="q" for="request">What can we do for you? How can we help you?<span class="star">*</span></label>
+      <input type="text" id="request" name="request" placeholder="Your answer">
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card">
+      <fieldset>
+        <legend class="q">What is the priority of your task? How urgent do you need help?</legend>
+        <label class="opt"><input type="radio" name="priority" value="Urgent (need response right away)"> Urgent (need response right away)</label>
+        <label class="opt"><input type="radio" name="priority" value="High priority (within 1-2 business day)"> High priority (within 1-2 business day)</label>
+        <label class="opt"><input type="radio" name="priority" value="Middle priority (within 1-2 week)"> Middle priority (within 1-2 week)</label>
+        <label class="opt"><input type="radio" name="priority" value="__other__"> Other:
+          <input class="other-input" type="text" name="priority_other" aria-label="Other answer">
+        </label>
+      </fieldset>
+    </div>
+
+    <div class="card" data-file>
+      <label class="q" for="resume" style="display:block;margin-bottom:20px">Please upload a copy of your resume to be assigned to proper HAIMN networks.</label>
+      <p class="hint">Upload 1 supported file: PDF. Max 10 MB.</p>
+      <input type="file" id="resume" name="resume" accept="application/pdf,.pdf">
+      <button type="button" class="file-btn" id="fileBtn">&#8679; Add file</button>
+      <span class="file-name" id="fileName"></span>
+      <div class="error-msg" id="fileError">Please choose a PDF file no larger than 10 MB</div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="submit" id="submitBtn">Submit</button>
+      <button type="button" class="clear" id="clearBtn">Clear form</button>
+    </div>
+    <p id="formError" class="req-note" role="alert" hidden style="margin-top:12px">Please fix the highlighted questions and try again.</p>
+  </form>
+
+  <div class="card success" id="thanks" hidden>
+    <h2>Thank you!</h2>
+    <p>Your request has been received. We will get back to you based on the priority you selected.</p>
+    <a href="index.html">Back to the HAIMN Survey</a>
+  </div>
+
+  <footer>HAIMN Member Form &middot; Please do not submit passwords through this form.</footer>
+</main>
+
+<script>
+  // ---------------------------------------------------------------
+  // WHERE DO REQUESTS GO?
+  // Paste a form-endpoint URL here (for example a Formspree URL) and every
+  // submission, including the resume file, is sent there as a normal form post.
+  // Leave it empty for demo mode: nothing is sent; answers (without the file)
+  // are only saved in this browser.
+  // Note: some services only accept file uploads on a paid plan.
+  // ---------------------------------------------------------------
+  const FORM_ENDPOINT = "";
+  const MAX_BYTES = 10 * 1024 * 1024;
+
+  const form = document.getElementById("helpForm");
+  const thanks = document.getElementById("thanks");
+  const submitBtn = document.getElementById("submitBtn");
+  const formError = document.getElementById("formError");
+  const fileInput = document.getElementById("resume");
+  const fileCard = form.querySelector("[data-file]");
+  const fileName = document.getElementById("fileName");
+
+  document.getElementById("fileBtn").addEventListener("click", function () { fileInput.click(); });
+  fileInput.addEventListener("change", function () {
+    const f = fileInput.files[0];
+    fileName.textContent = f ? f.name : "";
+    fileCard.classList.remove("invalid");
+  });
+
+  document.querySelectorAll(".other-input").forEach(function (box) {
+    box.addEventListener("input", function () {
+      box.closest(".opt").querySelector('input[type="radio"]').checked = true;
+    });
+  });
+
+  function validate() {
+    let ok = true;
+    form.querySelectorAll(".card[data-required]").forEach(function (card) {
+      const input = card.querySelector("input");
+      const value = input.value.trim();
+      let valid = value !== "";
+      if (valid && card.dataset.type === "email") valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      card.classList.toggle("invalid", !valid);
+      if (!valid) ok = false;
+    });
+    const f = fileInput.files[0];
+    if (f) {
+      const isPdf = f.type === "application/pdf" || /\.pdf$/i.test(f.name);
+      const fileOk = isPdf && f.size <= MAX_BYTES;
+      fileCard.classList.toggle("invalid", !fileOk);
+      if (!fileOk) ok = false;
+    }
+    return ok;
+  }
+
+  form.addEventListener("input", function (e) {
+    const card = e.target.closest(".card.invalid");
+    if (card) card.classList.remove("invalid");
+  });
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    formError.hidden = true;
+    if (!validate()) {
+      formError.hidden = false;
+      const first = form.querySelector(".card.invalid input:not([type=file])");
+      if (first) first.focus();
+      return;
+    }
+    const fd = new FormData(form);
+    if (fd.get("priority") === "__other__") fd.set("priority", "Other: " + (fd.get("priority_other") || ""));
+    fd.delete("priority_other");
+    fd.set("submitted_at", new Date().toISOString());
+    submitBtn.disabled = true;
+    try {
+      if (FORM_ENDPOINT) {
+        const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: fd });
+        if (!res.ok) throw new Error("Request failed");
+      } else {
+        try {
+          const data = {};
+          fd.forEach(function (v, k) { data[k] = (v instanceof File) ? v.name : v; });
+          const saved = JSON.parse(localStorage.getItem("haimn_help_requests") || "[]");
+          saved.push(data);
+          localStorage.setItem("haimn_help_requests", JSON.stringify(saved));
+        } catch (err) { /* storage unavailable: demo mode still shows the thank-you page */ }
+      }
+      form.hidden = true;
+      thanks.hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      formError.textContent = "Something went wrong while submitting. Please try again.";
+      formError.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (confirm("Clear all answers in this form?")) {
+      form.reset();
+      fileName.textContent = "";
+      form.querySelectorAll(".invalid").forEach(function (c) { c.classList.remove("invalid"); });
+      formError.hidden = true;
+    }
+  });
+</script>
+</body>
+</html>
