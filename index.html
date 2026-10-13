@@ -3,294 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAIMN Survey</title>
-<style>
-  :root {
-    --bg: #e4efe0;
-    --card: #ffffff;
-    --text: #202124;
-    --muted: #5f6368;
-    --line: #dadce0;
-    --accent: #3f8a1f;
-    --accent-dark: #2f6c15;
-    --error: #d93025;
-    --link: #1a0dab;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c2a1a;
-      --card: #26302a;
-      --text: #e8eae6;
-      --muted: #a9b2a8;
-      --line: #46524a;
-      --accent: #6fbf4a;
-      --accent-dark: #8fd46c;
-      --error: #f28b82;
-      --link: #8ab4f8;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Roboto", "Segoe UI", Arial, sans-serif;
-    line-height: 1.5;
-  }
-  main { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 12px;
-  }
-  .card.title { border-top: 10px solid var(--accent); padding-top: 22px; }
-  h1 { font-size: 2rem; font-weight: 400; margin: 0 0 8px; }
-  .intro { color: var(--muted); margin: 0 0 12px; }
-  .req-note { color: var(--error); font-size: .875rem; margin: 0; }
-  .q { font-size: 1rem; font-weight: 500; margin: 0 0 16px; padding: 0; }
-  .q .star { color: var(--error); margin-left: 4px; }
-  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
-  legend { padding: 0; }
-
-  input[type="text"], input[type="email"] {
-    width: 100%;
-    max-width: 100%;
-    border: 0;
-    border-bottom: 1px solid var(--line);
-    background: transparent;
-    color: var(--text);
-    font: inherit;
-    padding: 8px 0;
-    outline: none;
-    transition: border-color .15s;
-  }
-  input[type="text"]:focus, input[type="email"]:focus {
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 7px;
-  }
-  .short { max-width: 50%; }
-  @media (max-width: 520px) { .short { max-width: 100%; } }
-
-  .opt { display: flex; align-items: center; gap: 12px; padding: 8px 0; cursor: pointer; }
-  .opt input[type="radio"] { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; flex: none; }
-  .opt .other-input { flex: 1; }
-  a { color: var(--link); }
-
-  .error-msg { display: none; color: var(--error); font-size: .8125rem; margin-top: 8px; }
-  .card.invalid { border-color: var(--error); }
-  .card.invalid .error-msg { display: block; }
-
-  .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-  button {
-    font: inherit; cursor: pointer; border-radius: 4px; padding: 9px 24px; border: 0;
-  }
-  .submit { background: var(--accent); color: #fff; font-weight: 500; }
-  .submit:hover { background: var(--accent-dark); }
-  .submit:disabled { opacity: .6; cursor: default; }
-  .clear { background: transparent; color: var(--accent); font-weight: 500; }
-  .clear:hover { background: rgba(63,138,31,.08); }
-  button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  footer { text-align: center; color: var(--muted); font-size: .8125rem; margin-top: 32px; }
-  .success h2 { font-weight: 400; margin: 0 0 8px; }
-  .success p { margin: 0 0 16px; color: var(--muted); }
-  [hidden] { display: none !important; }
-</style>
+<title>HAIMN</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">HAIMN</a>
+  <nav aria-label="Main">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="survey.html">Survey</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="networking.html">Networking</a>
+    <a href="request-help.html">Get Help</a>
+  </nav>
+</div></header>
 <main>
-
-  <form id="survey" novalidate>
-    <div class="card title">
-      <h1>HAIMN Survey</h1>
-      <p class="intro">Tell us what kind of help you need and how we can support you.</p>
-      <p class="req-note">* Indicates required question</p>
+  <section class="card hero">
+    <h1>HAIMN</h1>
+    <p class="lead">Get help and help others with the tasks that matter to you. Tell us what you need, get matched to the right track, and connect with peers and mentors.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="survey.html">Start the survey</a>
+      <a class="btn btn-ghost" href="request-help.html">Request help</a>
     </div>
+    <p id="welcomeBack" class="small muted" style="margin:16px 0 0" hidden></p>
+  </section>
 
-    <div class="card" data-required>
-      <label class="q" for="name">Name<span class="star">*</span></label>
-      <input class="short" type="text" id="name" name="name" placeholder="Your answer" autocomplete="name">
-      <div class="error-msg">This is a required question</div>
-    </div>
+  <h2 class="section-title">How it works</h2>
+  <ol class="steps">
+    <li><strong>Register &amp; take the survey</strong><span class="small muted">Tell us what you want help with, your goals and your background.</span></li>
+    <li><strong>Get matched to a track</strong><span class="small muted">Your answers place you in one of five tracks.</span></li>
+    <li><strong>Open your dashboard</strong><span class="small muted">See tools, resources and groups shaped to your track.</span></li>
+    <li><strong>Connect with others</strong><span class="small muted">Find peers, mentors, and study or project partners.</span></li>
+    <li><strong>Build your profile</strong><span class="small muted">Contribute, earn reputation and keep your profile up to date.</span></li>
+  </ol>
 
-    <div class="card" data-required data-type="email">
-      <label class="q" for="email">Email (please use your personal email)<span class="star">*</span></label>
-      <input class="short" type="email" id="email" name="email" placeholder="Your answer" autocomplete="email">
-      <div class="error-msg">Please enter a valid email address</div>
-    </div>
+  <h2 class="section-title">Five tracks</h2>
+  <div class="grid" id="tracks"></div>
 
-    <div class="card" data-required>
-      <label class="q" for="task1">What is the first important task that you need help with or would like others to do it for you?<span class="star">*</span></label>
-      <input type="text" id="task1" name="task1" placeholder="Your answer">
-      <div class="error-msg">This is a required question</div>
-    </div>
-
+  <h2 class="section-title">What is available today</h2>
+  <div class="grid">
     <div class="card">
-      <label class="q" for="task2">What is the second important task that you need help with or would like others to do it for you?</label>
-      <input type="text" id="task2" name="task2" placeholder="Your answer">
+      <div class="card-head"><h3>Live now</h3><span class="pill live">Live</span></div>
+      <ul>
+        <li>Intake survey with automatic track matching</li>
+        <li>Personalized dashboard</li>
+        <li>Help requests with resume upload</li>
+        <li>Mentor and study-partner requests</li>
+      </ul>
     </div>
-
     <div class="card">
-      <label class="q" for="task3">What is the third important task that you need help with or would like others to do it for you?</label>
-      <input type="text" id="task3" name="task3" placeholder="Your answer">
+      <div class="card-head"><h3>Coming soon</h3><span class="pill soon">Planned</span></div>
+      <ul>
+        <li>Accounts with email verification</li>
+        <li>AI chat shaped to your track</li>
+        <li>Direct messages and Q&amp;A board</li>
+        <li>Reputation and contribution score</li>
+      </ul>
     </div>
-
-    <div class="card">
-      <label class="q" for="work">Where do you work besides going to school? If you don't have any part-time or full-time job, enter NA.</label>
-      <input type="text" id="work" name="work" placeholder="Your answer">
-    </div>
-
-    <div class="card">
-      <fieldset>
-        <legend class="q">How much does your employer know about AI?</legend>
-        <label class="opt"><input type="radio" name="employer_ai" value="Largely (maximum capacity)"> Largely (maximum capacity)</label>
-        <label class="opt"><input type="radio" name="employer_ai" value="Medium"> Medium</label>
-        <label class="opt"><input type="radio" name="employer_ai" value="Little"> Little</label>
-        <label class="opt"><input type="radio" name="employer_ai" value="None"> None</label>
-        <label class="opt"><input type="radio" name="employer_ai" value="I don't know"> I don't know</label>
-        <label class="opt"><input type="radio" name="employer_ai" value="__other__"> Other:
-          <input class="other-input" type="text" name="employer_ai_other" aria-label="Other answer">
-        </label>
-      </fieldset>
-    </div>
-
-    <div class="card">
-      <fieldset>
-        <legend class="q">Do you want to join HAIMN network to get help and help others with various tasks?</legend>
-        <label class="opt"><input type="radio" name="join" value="Yes"> <span>Yes, use this link to ask for help:
-          <a href="request-help.html">HAIMN Member Form</a></span></label>
-        <label class="opt"><input type="radio" name="join" value="No"> No</label>
-        <label class="opt"><input type="radio" name="join" value="Maybe in the future"> Maybe in the future</label>
-        <label class="opt"><input type="radio" name="join" value="I don't know"> I don't know</label>
-        <label class="opt"><input type="radio" name="join" value="__other__"> Other:
-          <input class="other-input" type="text" name="join_other" aria-label="Other answer">
-        </label>
-      </fieldset>
-    </div>
-
-    <div class="actions">
-      <button type="submit" class="submit" id="submitBtn">Submit</button>
-      <button type="button" class="clear" id="clearBtn">Clear form</button>
-    </div>
-    <p id="formError" class="req-note" role="alert" hidden style="margin-top:12px">Please fix the highlighted questions and try again.</p>
-  </form>
-
-  <div class="card success" id="thanks" hidden>
-    <h2>Thank you!</h2>
-    <p>Your response has been recorded.</p>
-    <button type="button" class="clear" id="againBtn" style="padding-left:0">Submit another response</button>
   </div>
-
-  <footer>HAIMN Survey &middot; Please do not submit passwords through this form.</footer>
+  <footer>HAIMN &middot; Please do not submit passwords through these forms.</footer>
 </main>
-
+<script src="config.js"></script>
+<script src="app.js"></script>
 <script>
-  // ---------------------------------------------------------------
-  // WHERE DO RESPONSES GO?
-  // Paste a form-endpoint URL here (for example a Formspree URL such as
-  // "https://formspree.io/f/xxxxxxx") and every submission will be sent there.
-  // Leave it empty to run in demo mode: answers are only saved in this
-  // browser (localStorage) and nothing is sent anywhere.
-  // ---------------------------------------------------------------
-  const FORM_ENDPOINT = "";
-
-  const form = document.getElementById("survey");
-  const thanks = document.getElementById("thanks");
-  const submitBtn = document.getElementById("submitBtn");
-  const formError = document.getElementById("formError");
-
-  // Typing in an "Other" box selects its radio button
-  document.querySelectorAll(".other-input").forEach(function (box) {
-    box.addEventListener("input", function () {
-      const radio = box.closest(".opt").querySelector('input[type="radio"]');
-      radio.checked = true;
-    });
+  var B = HAIMN.BUCKETS;
+  var html = "";
+  HAIMN.ORDER.forEach(function (k) {
+    var b = B[k];
+    html += '<div class="card bcard b-' + k + '"><h3>' + HAIMN.esc(b.track) + '</h3><p class="small muted" style="margin:0 0 8px">' +
+      HAIMN.esc(b.area) + '</p><p style="margin:0">' + HAIMN.esc(b.blurb) + '</p></div>';
   });
-
-  function validate() {
-    let ok = true;
-    form.querySelectorAll(".card[data-required]").forEach(function (card) {
-      const input = card.querySelector("input");
-      const value = input.value.trim();
-      let valid = value !== "";
-      if (valid && card.dataset.type === "email") {
-        valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      }
-      card.classList.toggle("invalid", !valid);
-      if (!valid) ok = false;
-    });
-    return ok;
+  document.getElementById("tracks").innerHTML = html;
+  var p = HAIMN.getProfile();
+  if (p && p.name) {
+    var el = document.getElementById("welcomeBack");
+    el.hidden = false;
+    el.innerHTML = 'Welcome back, ' + HAIMN.esc(p.name) + '. <a href="dashboard.html">Go to your dashboard</a>';
   }
-
-  form.addEventListener("input", function (e) {
-    const card = e.target.closest(".card.invalid");
-    if (card) card.classList.remove("invalid");
-  });
-
-  function collect() {
-    const data = {};
-    new FormData(form).forEach(function (v, k) { data[k] = v; });
-    if (data.employer_ai === "__other__") data.employer_ai = "Other: " + (data.employer_ai_other || "");
-    if (data.join === "__other__") data.join = "Other: " + (data.join_other || "");
-    delete data.employer_ai_other;
-    delete data.join_other;
-    data.submitted_at = new Date().toISOString();
-    return data;
-  }
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    formError.hidden = true;
-    if (!validate()) {
-      formError.hidden = false;
-      const first = form.querySelector(".card.invalid input");
-      if (first) first.focus();
-      return;
-    }
-    const data = collect();
-    submitBtn.disabled = true;
-    try {
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error("Request failed");
-      } else {
-        try {
-          const saved = JSON.parse(localStorage.getItem("haimn_responses") || "[]");
-          saved.push(data);
-          localStorage.setItem("haimn_responses", JSON.stringify(saved));
-        } catch (err) { /* storage unavailable: demo mode still shows the thank-you page */ }
-      }
-      form.hidden = true;
-      thanks.hidden = false;
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      formError.textContent = "Something went wrong while submitting. Please try again.";
-      formError.hidden = false;
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
-
-  document.getElementById("clearBtn").addEventListener("click", function () {
-    if (confirm("Clear all answers in this form?")) {
-      form.reset();
-      form.querySelectorAll(".invalid").forEach(function (c) { c.classList.remove("invalid"); });
-      formError.hidden = true;
-    }
-  });
-
-  document.getElementById("againBtn").addEventListener("click", function () {
-    form.reset();
-    thanks.hidden = true;
-    form.hidden = false;
-    window.scrollTo({ top: 0 });
-  });
 </script>
 </body>
 </html>

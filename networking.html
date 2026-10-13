@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Networking | HAIMN</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">HAIMN</a>
+  <nav aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="survey.html">Survey</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="networking.html" aria-current="page">Networking</a>
+    <a href="request-help.html">Get Help</a>
+  </nav>
+</div></header>
+<main>
+  <div class="card title">
+    <h1>Networking Hub</h1>
+    <p class="muted" style="margin:0">Connections are pre-filtered by your track and goals. Casual and friendly, not formal like LinkedIn.</p>
+    <p id="trackNote" class="small" style="margin:12px 0 0"></p>
+  </div>
+
+  <h2 class="section-title" id="groups">Community groups</h2>
+  <div class="btn-row" style="margin:0 0 12px">
+    <button type="button" class="btn btn-ghost" id="toggleAll">Show all groups</button>
+  </div>
+  <div class="grid" id="groupGrid"></div>
+
+  <h2 class="section-title">Connection tools</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-head"><h3>Find a Mentor</h3><span class="pill live">Live</span></div>
+      <p class="small muted">Connect with seniors, alumni or professionals.</p>
+      <a class="btn btn-primary" href="request-help.html?need=mentor">Request a mentor</a>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Study / Project Partners</h3><span class="pill live">Live</span></div>
+      <p class="small muted">Match by course or skill set.</p>
+      <a class="btn btn-primary" href="request-help.html?need=partner">Find a partner</a>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Direct Messaging</h3><span class="pill soon">Coming soon</span></div>
+      <p class="small muted">Casual DMs with peers in your community.</p>
+      <span class="btn btn-ghost" aria-disabled="true">Not available yet</span>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Q&amp;A Board</h3><span class="pill soon">Coming soon</span></div>
+      <p class="small muted">Post questions to your track's community.</p>
+      <span class="btn btn-ghost" aria-disabled="true">Not available yet</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">AI Networking Assistant <span class="pill soon" style="vertical-align:middle">Coming soon</span></h2>
+  <div class="card">
+    <ul class="feature-list">
+      <li>Suggests "People you should meet"</li>
+      <li>Summarizes peer profiles by relevance</li>
+      <li>Drafts intro messages for you</li>
+      <li>Flags peers who asked similar questions</li>
+    </ul>
+    <p class="small muted" style="margin:0">Next steps: schedule a chat or virtual coffee, join a peer's study or work session, or answer a question to build your reputation.</p>
+  </div>
+
+  <h2 class="section-title">Your dynamic profile</h2>
+  <div class="grid">
+    <div class="card">
+      <dl class="kv" id="profile"></dl>
+      <p class="small muted" style="margin:12px 0 0">Reputation &amp; contribution score will count replies, helpfulness votes, mentor sessions and endorsements.</p>
+    </div>
+    <div class="card" id="openCard">
+      <h3>Open to</h3>
+      <p class="small muted">Tell the community what you are open to.</p>
+      <label class="opt"><input type="checkbox" name="open" value="Networking"> Networking</label>
+      <label class="opt"><input type="checkbox" name="open" value="Mentorship"> Mentorship</label>
+      <label class="opt"><input type="checkbox" name="open" value="Collab"> Collab</label>
+      <button type="button" class="btn btn-primary" id="saveOpen" style="margin-top:8px">Save</button>
+      <p id="openMsg" class="small" style="margin:10px 0 0" role="status"></p>
+    </div>
+  </div>
+  <footer>HAIMN &middot; Please do not submit passwords through these forms.</footer>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  var B = HAIMN.BUCKETS, G = HAIMN.GROUPS, esc = HAIMN.esc;
+  var p = HAIMN.getProfile();
+  var showAll = !(p && B[p.bucket]) || B[p.bucket].group === "all";
+  var mine = p && B[p.bucket] ? B[p.bucket].group : null;
+
+  var note = document.getElementById("trackNote");
+  if (p && B[p.bucket]) {
+    note.innerHTML = 'Showing groups for your <strong>' + esc(B[p.bucket].track) + '</strong>.';
+  } else {
+    note.innerHTML = 'Showing all groups. <a href="survey.html">Take the survey</a> to see groups matched to you.';
+  }
+
+  function drawGroups() {
+    var keys = Object.keys(G).filter(function (g) { return showAll || g === mine; });
+    document.getElementById("groupGrid").innerHTML = keys.map(function (g) {
+      var x = G[g];
+      return '<div class="card bcard ' + x.cls + (g === mine ? " me" : "") + '"><h3>' + esc(x.title) + '</h3>' +
+        '<p class="small muted">' + esc(x.by) + '</p><ul class="chips">' +
+        x.examples.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + '</ul>' +
+        (g === mine ? '<span class="pill live">Your group</span>' : "") + '</div>';
+    }).join("");
+    var t = document.getElementById("toggleAll");
+    t.textContent = showAll ? "Show only my groups" : "Show all groups";
+    t.hidden = !(p && B[p.bucket]) || B[p.bucket].group === "all";
+  }
+  document.getElementById("toggleAll").addEventListener("click", function () { showAll = !showAll; drawGroups(); });
+  drawGroups();
+
+  var rows;
+  if (p && B[p.bucket]) {
+    rows = [["AI bucket badge", B[p.bucket].track], ["Name", p.name], ["Role", p.role],
+      ["Skills & interests", p.subjects || "Not provided"], ["Goal", p.goal],
+      ["Open to", (p.openTo && p.openTo.length) ? p.openTo.join(" / ") : "Not set yet"],
+      ["Reputation", "0"]];
+    (p.openTo || []).forEach(function (o) {
+      var c = document.querySelector('input[name="open"][value="' + o + '"]');
+      if (c) c.checked = true;
+    });
+  } else {
+    rows = [["Profile", "Not created yet"]];
+    document.getElementById("openCard").hidden = true;
+  }
+  document.getElementById("profile").innerHTML = rows.map(function (r) {
+    return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>";
+  }).join("");
+  if (!(p && B[p.bucket])) {
+    document.getElementById("profile").insertAdjacentHTML("afterend", '<p class="small" style="margin:12px 0 0"><a href="survey.html">Take the survey</a> to build your profile.</p>');
+  }
+
+  document.getElementById("saveOpen").addEventListener("click", function () {
+    var vals = Array.prototype.map.call(document.querySelectorAll('input[name="open"]:checked'), function (c) { return c.value; });
+    p.openTo = vals;
+    HAIMN.saveProfile(p);
+    var msg = document.getElementById("openMsg");
+    msg.textContent = "Saved.";
+    HAIMN.send({ type: "update", email: p.email, bucket_assigned: B[p.bucket].track, open_to: vals.join(", ") })
+      .catch(function () { msg.textContent = "Saved on this device only (could not reach the server)."; });
+    var dd = document.querySelectorAll("#profile dd");
+    if (dd[5]) dd[5].textContent = vals.length ? vals.join(" / ") : "Not set yet";
+  });
+</script>
+</body>
+</html>

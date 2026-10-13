@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Dashboard | HAIMN</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">HAIMN</a>
+  <nav aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="survey.html">Survey</a>
+    <a href="dashboard.html" aria-current="page">My Dashboard</a>
+    <a href="networking.html">Networking</a>
+    <a href="request-help.html">Get Help</a>
+  </nav>
+</div></header>
+<main>
+  <div id="empty" class="card empty" hidden>
+    <h1>Your dashboard is waiting</h1>
+    <p class="muted">Take the short survey and we will match you to a track and build your dashboard.</p>
+    <a class="btn btn-primary" href="survey.html">Start the survey</a>
+  </div>
+
+  <div id="dash" hidden>
+    <div class="card bcard" id="hero">
+      <div class="card-head">
+        <div>
+          <p class="small muted" style="margin:0 0 4px">Personalized Dashboard</p>
+          <h1 id="welcome"></h1>
+        </div>
+        <span class="badge" id="badge"></span>
+      </div>
+      <p id="heroBlurb" style="margin:0"></p>
+    </div>
+
+    <h2 class="section-title">Your tools</h2>
+    <div class="grid">
+      <div class="card bcard" id="toolsCard">
+        <h3>What your track unlocks</h3>
+        <ul class="feature-list" id="features"></ul>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>AI chat shaped to your track</h3><span class="pill soon">Coming soon</span></div>
+        <p class="small muted">The chat is not live yet. These are the kinds of questions it will be tuned for:</p>
+        <ul class="feature-list" id="starters"></ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">Resource shortcuts</h2>
+    <div class="grid" id="shortcuts"></div>
+
+    <h2 class="section-title">Community groups for you</h2>
+    <div class="card">
+      <p class="small muted">Groups are pre-filtered for your track.</p>
+      <ul class="chips" id="groupChips"></ul>
+      <a class="btn btn-ghost" href="networking.html#groups">Open the networking hub</a>
+    </div>
+
+    <h2 class="section-title">Your profile</h2>
+    <div class="grid">
+      <div class="card">
+        <dl class="kv" id="profile"></dl>
+      </div>
+      <div class="card">
+        <h3>Change my track</h3>
+        <p class="small muted">You can update your track at any time. Your chat and dashboard will follow.</p>
+        <label class="q" for="trackSel" style="margin-bottom:8px">Track</label>
+        <select id="trackSel"></select>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="saveTrack">Save track</button>
+          <a class="btn btn-ghost" href="survey.html">Retake the survey</a>
+        </div>
+        <p id="trackMsg" class="small" style="margin:10px 0 0" role="status"></p>
+      </div>
+    </div>
+    <p class="small muted">Your profile is remembered in this browser so every page can personalize itself.
+      <button type="button" class="clear" id="forget" style="padding:0">Forget me on this device</button></p>
+  </div>
+  <footer>HAIMN &middot; Please do not submit passwords through these forms.</footer>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  var B = HAIMN.BUCKETS, esc = HAIMN.esc;
+  var p = HAIMN.getProfile();
+  if (!p || !B[p.bucket]) {
+    document.getElementById("empty").hidden = false;
+  } else {
+    document.getElementById("dash").hidden = false;
+    render();
+  }
+
+  function render() {
+    var b = B[p.bucket];
+    ["hero", "toolsCard"].forEach(function (id) {
+      var el = document.getElementById(id);
+      HAIMN.ORDER.forEach(function (k) { el.classList.remove("b-" + k); });
+      el.classList.add("b-" + p.bucket);
+    });
+    document.getElementById("badge").className = "badge b-" + p.bucket;
+    document.getElementById("badge").textContent = b.track;
+    document.getElementById("welcome").textContent = "Welcome, " + p.name;
+    document.getElementById("heroBlurb").textContent = b.blurb + " Area: " + b.area + ".";
+    document.getElementById("features").innerHTML = b.features.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("");
+    document.getElementById("starters").innerHTML = b.starters.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("");
+
+    var short = [
+      ["Ask for help in your area", "Send a request tuned to " + b.area + ".", "request-help.html?topic=" + p.bucket, "Request help"],
+      ["Find a mentor", "Connect with seniors, alumni or professionals.", "request-help.html?need=mentor", "Request a mentor"],
+      ["Find study or project partners", "Match by course or skill set.", "request-help.html?need=partner", "Find a partner"],
+      ["Browse community groups", "See groups pre-filtered for your track.", "networking.html#groups", "Open groups"]
+    ];
+    document.getElementById("shortcuts").innerHTML = short.map(function (s) {
+      return '<div class="card"><h3>' + esc(s[0]) + '</h3><p class="small muted">' + esc(s[1]) +
+        '</p><a class="btn btn-ghost" href="' + s[2] + '">' + esc(s[3]) + '</a></div>';
+    }).join("");
+
+    var gKeys = b.group === "all" ? Object.keys(HAIMN.GROUPS) : [b.group];
+    var chips = [];
+    gKeys.forEach(function (g) { HAIMN.GROUPS[g].examples.forEach(function (x) { chips.push(x); }); });
+    document.getElementById("groupChips").innerHTML = chips.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("");
+
+    var rows = [
+      ["Name", p.name], ["Email", p.email], ["Role", p.role], ["Goal", p.goal],
+      ["Subjects / industries", p.subjects || "Not provided"],
+      ["Top tasks", (p.tasks || []).join("; ")],
+      ["Open to", (p.openTo && p.openTo.length) ? p.openTo.join(", ") : "Set this in the networking hub"],
+      ["Reputation", "0 (earned by helping others \u2013 coming soon)"]
+    ];
+    document.getElementById("profile").innerHTML = rows.map(function (r) {
+      return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>";
+    }).join("");
+
+    var sel = document.getElementById("trackSel");
+    sel.innerHTML = HAIMN.ORDER.map(function (k) {
+      return '<option value="' + k + '"' + (k === p.bucket ? " selected" : "") + ">" + esc(B[k].track + " \u2013 " + B[k].area) + "</option>";
+    }).join("");
+  }
+
+  document.getElementById("saveTrack").addEventListener("click", function () {
+    var key = document.getElementById("trackSel").value;
+    var msg = document.getElementById("trackMsg");
+    if (key === p.bucket) { msg.textContent = "That is already your track."; return; }
+    p.bucket = key;
+    HAIMN.saveProfile(p);
+    render();
+    msg.textContent = "Saved. Your dashboard now follows the " + B[key].track + ".";
+    HAIMN.send({ type: "update", email: p.email, bucket_assigned: B[key].track, open_to: (p.openTo || []).join(", ") })
+      .catch(function () { msg.textContent += " (Could not sync to the server, saved on this device only.)"; });
+  });
+
+  document.getElementById("forget").addEventListener("click", function () {
+    if (confirm("Remove your profile from this browser? Responses already submitted are not affected.")) {
+      HAIMN.clearProfile();
+      location.reload();
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAIMN Survey</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">HAIMN</a>
+  <nav aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="survey.html" aria-current="page">Survey</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="networking.html">Networking</a>
+    <a href="request-help.html">Get Help</a>
+  </nav>
+</div></header>
+<main class="narrow">
+  <form id="survey" novalidate>
+    <div class="card title">
+      <h1>HAIMN Survey</h1>
+      <p class="muted">Step 1 of your HAIMN journey. Your answers help us match you to the right track and personalize your dashboard.</p>
+      <p class="req-note">* Indicates required question</p>
+    </div>
+
+    <div class="card" data-required>
+      <label class="q" for="name">Name<span class="star">*</span></label>
+      <input class="short" type="text" id="name" name="name" placeholder="Your answer" autocomplete="name">
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card" data-required data-type="email">
+      <label class="q" for="email">Email (please use your personal email)<span class="star">*</span></label>
+      <input class="short" type="email" id="email" name="email" placeholder="Your answer" autocomplete="email">
+      <div class="error-msg">Please enter a valid email address</div>
+    </div>
+
+    <div class="card" data-required>
+      <fieldset>
+        <legend class="q">Are you a student, a professional, or both?<span class="star">*</span></legend>
+        <label class="opt"><input type="radio" name="role" value="Student"> Student</label>
+        <label class="opt"><input type="radio" name="role" value="Professional"> Professional</label>
+        <label class="opt"><input type="radio" name="role" value="Both"> Both</label>
+      </fieldset>
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card" data-required>
+      <label class="q" for="task1">What is the first important task that you need help with or would like others to do it for you?<span class="star">*</span></label>
+      <input type="text" id="task1" name="task1" placeholder="Your answer">
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card">
+      <label class="q" for="task2">What is the second important task that you need help with or would like others to do it for you?</label>
+      <input type="text" id="task2" name="task2" placeholder="Your answer">
+    </div>
+
+    <div class="card">
+      <label class="q" for="task3">What is the third important task that you need help with or would like others to do it for you?</label>
+      <input type="text" id="task3" name="task3" placeholder="Your answer">
+    </div>
+
+    <div class="card" data-required>
+      <label class="q" for="goal">What is your academic or career goal?<span class="star">*</span></label>
+      <input type="text" id="goal" name="goal" placeholder="Your answer">
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card">
+      <label class="q" for="subjects">Which subjects or industries matter most to you?</label>
+      <input type="text" id="subjects" name="subjects" placeholder="Your answer">
+    </div>
+
+    <div class="card">
+      <label class="q" for="work">Where do you work besides going to school? If you don't have any part-time or full-time job, enter NA.</label>
+      <input type="text" id="work" name="work" placeholder="Your answer">
+    </div>
+
+    <div class="card">
+      <fieldset>
+        <legend class="q">How much does your employer know about AI?</legend>
+        <label class="opt"><input type="radio" name="employer_ai" value="Largely (maximum capacity)"> Largely (maximum capacity)</label>
+        <label class="opt"><input type="radio" name="employer_ai" value="Medium"> Medium</label>
+        <label class="opt"><input type="radio" name="employer_ai" value="Little"> Little</label>
+        <label class="opt"><input type="radio" name="employer_ai" value="None"> None</label>
+        <label class="opt"><input type="radio" name="employer_ai" value="I don't know"> I don't know</label>
+        <label class="opt"><input type="radio" name="employer_ai" value="__other__"> Other:
+          <input class="other-input" type="text" name="employer_ai_other" aria-label="Other answer"></label>
+      </fieldset>
+    </div>
+
+    <div class="card" data-required>
+      <fieldset>
+        <legend class="q">Which area do you need the most help with?<span class="star">*</span></legend>
+        <label class="opt"><input type="radio" name="area" value="academic"> <span>Academic coursework<small>Courses, homework, studying</small></span></label>
+        <label class="opt"><input type="radio" name="area" value="career"> <span>Career &amp; job search<small>Resume, interviews, job hunting</small></span></label>
+        <label class="opt"><input type="radio" name="area" value="technical"> <span>Coding &amp; technical<small>Programming, debugging, algorithms</small></span></label>
+        <label class="opt"><input type="radio" name="area" value="productivity"> <span>Productivity &amp; life<small>Daily goals, habits, organization</small></span></label>
+        <label class="opt"><input type="radio" name="area" value="exploration"> <span>I'm not sure yet<small>We will pick a starting point from your answers</small></span></label>
+      </fieldset>
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <div class="card">
+      <fieldset>
+        <legend class="q">Do you want to join HAIMN network to get help and help others with various tasks?</legend>
+        <label class="opt"><input type="radio" name="join" value="Yes"> <span>Yes, use this link to ask for help:
+          <a href="request-help.html" target="_blank" rel="noopener">HAIMN Member Form</a></span></label>
+        <label class="opt"><input type="radio" name="join" value="No"> No</label>
+        <label class="opt"><input type="radio" name="join" value="Maybe in the future"> Maybe in the future</label>
+        <label class="opt"><input type="radio" name="join" value="I don't know"> I don't know</label>
+        <label class="opt"><input type="radio" name="join" value="__other__"> Other:
+          <input class="other-input" type="text" name="join_other" aria-label="Other answer"></label>
+      </fieldset>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="submit" id="submitBtn">Submit</button>
+      <button type="button" class="clear" id="clearBtn">Clear form</button>
+    </div>
+    <p id="formError" class="req-note" role="alert" hidden style="margin-top:12px">Please fix the highlighted questions and try again.</p>
+  </form>
+
+  <div class="card success" id="thanks" hidden>
+    <h2>Thank you!</h2>
+    <p id="thanksText"></p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="dashboard.html">Go to my dashboard</a>
+      <a class="btn btn-ghost" href="request-help.html">Request help now</a>
+    </div>
+  </div>
+  <footer>HAIMN Survey &middot; Please do not submit passwords through this form.</footer>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  var form = document.getElementById("survey");
+  var submitBtn = document.getElementById("submitBtn");
+  var formError = document.getElementById("formError");
+  HAIMN.wireForm(form);
+
+  // If the visitor already took the survey, pre-fill name and email.
+  var old = HAIMN.getProfile();
+  if (old) { form.name.value = old.name || ""; form.email.value = old.email || ""; }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    formError.hidden = true;
+    if (!HAIMN.validateCards(form)) {
+      formError.textContent = "Please fix the highlighted questions and try again.";
+      formError.hidden = false;
+      var first = form.querySelector(".card.invalid input");
+      if (first) first.focus();
+      return;
+    }
+    var v = function (n) { return form.elements[n].value.trim(); };
+    var area = form.querySelector('input[name="area"]:checked').value;
+    var text = [v("task1"), v("task2"), v("task3"), v("goal"), v("subjects")].join(" ");
+    var bucket = area !== "exploration" ? area : HAIMN.matchBucket(text);
+    var B = HAIMN.BUCKETS;
+    var data = {
+      type: "survey",
+      name: v("name"), email: v("email"), role: HAIMN.radioValue(form, "role"),
+      task1: v("task1"), task2: v("task2"), task3: v("task3"),
+      goal: v("goal"), subjects: v("subjects"), work: v("work"),
+      employer_ai: HAIMN.radioValue(form, "employer_ai", "employer_ai_other"),
+      area_selected: B[area].area,
+      bucket_assigned: B[bucket].track,
+      join: HAIMN.radioValue(form, "join", "join_other")
+    };
+    submitBtn.disabled = true;
+    HAIMN.send(data).then(function () {
+      HAIMN.saveProfile({
+        name: data.name, email: data.email, role: data.role, goal: data.goal, subjects: data.subjects,
+        tasks: [data.task1, data.task2, data.task3].filter(Boolean),
+        bucket: bucket, openTo: (old && old.openTo) || [], createdAt: new Date().toISOString()
+      });
+      document.getElementById("thanksText").innerHTML =
+        'Your answers are recorded and you were matched to the <strong>' + HAIMN.esc(B[bucket].track) + '</strong>. ' +
+        'Your dashboard is ready.';
+      form.hidden = true;
+      document.getElementById("thanks").hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }).catch(function () {
+      formError.textContent = "Something went wrong while submitting. Please try again.";
+      formError.hidden = false;
+    }).then(function () { submitBtn.disabled = false; });
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    if (confirm("Clear all answers in this form?")) {
+      form.reset();
+      form.querySelectorAll(".invalid").forEach(function (c) { c.classList.remove("invalid"); });
+      formError.hidden = true;
+    }
+  });
+</script>
+</body>
+</html>
