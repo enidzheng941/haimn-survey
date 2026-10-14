@@ -1,31 +1,18 @@
 :root {
-  --bg: #e4efe0;
+  --bg: #e7eee3;
   --card: #ffffff;
   --text: #202124;
   --muted: #5f6368;
   --line: #dadce0;
-  --accent: #3f8a1f;
-  --accent-dark: #2f6c15;
+  --accent: #578635;
+  --accent-dark: #46702a;
   --error: #d93025;
-  --link: #1a56c4;
+  --link: #1a73e8;
   --academic: #6aa9e0;
   --career: #e8a64a;
   --technical: #4fb877;
   --productivity: #e5c94a;
   --exploration: #9aa0a6;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1c2a1a;
-    --card: #26302a;
-    --text: #e8eae6;
-    --muted: #a9b2a8;
-    --line: #46524a;
-    --accent: #6fbf4a;
-    --accent-dark: #8fd46c;
-    --error: #f28b82;
-    --link: #8ab4f8;
-  }
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -73,7 +60,7 @@ footer { text-align: center; color: var(--muted); font-size: .8125rem; margin: 3
 .btn-primary, .submit { background: var(--accent); color: #fff; font-weight: 500; }
 .btn-primary:hover, .submit:hover { background: var(--accent-dark); }
 .btn-ghost, .clear { background: transparent; color: var(--accent); font-weight: 500; border: 1px solid var(--line); }
-.btn-ghost:hover, .clear:hover { background: rgba(63, 138, 31, .08); }
+.btn-ghost:hover, .clear:hover { background: rgba(87, 134, 53, .09); }
 .clear { border: 0; }
 button:disabled { opacity: .6; cursor: default; }
 .btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
@@ -126,7 +113,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus { b
 .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
 .hint { color: var(--muted); font-size: .875rem; margin: -8px 0 12px; padding-top: 4px; }
 .file-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: transparent; color: var(--accent); font-weight: 500; }
-.file-btn:hover { background: rgba(63, 138, 31, .08); }
+.file-btn:hover { background: rgba(87, 134, 53, .09); }
 .file-name { margin-left: 12px; color: var(--muted); font-size: .9rem; word-break: break-all; }
 input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 .success h2 { font-weight: 400; }
@@ -144,3 +131,60 @@ input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; ov
 .feature-list li::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); }
 .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
 .empty { text-align: center; padding: 40px 24px; }
+
+/* =====================================================================
+   Google-Forms look for the two form pages (survey + member form)
+   ===================================================================== */
+body.gform { font-family: "Roboto", Arial, sans-serif; font-size: 15px; color: #202124; }
+.gform main { max-width: 640px; padding: 12px 12px 40px; }
+.gform .card { border-radius: 8px; border: 1px solid #dadce0; padding: 24px; margin-bottom: 12px; }
+.gform .card.title { border-top: 10px solid var(--accent); }
+.gform .hdr { padding: 0; }
+.gform .hdr .sect { padding: 22px 24px; border-bottom: 1px solid #dadce0; }
+.gform .hdr .sect:last-child { border-bottom: 0; }
+.gform .hdr .sect:first-child { padding-bottom: 20px; }
+.gform h1 { font-size: 32px; font-weight: 400; line-height: 40px; margin: 0; color: #202124; }
+.gform .desc { margin: 10px 0 0; font-size: 14px; color: #202124; }
+.gform .sect.note { font-size: 14px; color: #202124; }
+.gform .req-note { font-size: 14px; color: #d93025; margin: 0; }
+.gform .q { font-size: 16px; font-weight: 400; line-height: 24px; margin: 0 0 24px; color: #202124; }
+.gform .q .star { color: #d93025; margin-left: 4px; }
+.gform input[type="text"], .gform input[type="email"], .gform input[type="tel"] {
+  font-size: 14px; color: #202124; padding: 8px 0; border-bottom: 1px solid #dadce0; background: transparent;
+}
+.gform input::placeholder { color: #70757a; opacity: 1; }
+.gform input[type="text"]:focus, .gform input[type="email"]:focus, .gform input[type="tel"]:focus {
+  border-bottom: 2px solid var(--accent); padding-bottom: 7px;
+}
+.gform select { font-size: 14px; border: 1px solid #dadce0; border-radius: 4px; padding: 9px 10px; background: #fff; color: #202124; width: 100%; }
+.gform .opt { gap: 14px; padding: 7px 0; font-size: 14px; min-height: 38px; color: #202124; }
+.gform .opt small { font-size: 12px; color: #70757a; }
+.gform input[type="radio"] {
+  -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin: 0; flex: none;
+  border: 2px solid #5f6368; border-radius: 50%; background: #fff; cursor: pointer;
+}
+.gform input[type="radio"]:checked { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 0 4.5px, #fff 5.5px); }
+.gform input[type="radio"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.gform .opt a { color: #1a73e8; }
+.gform .hint { font-size: 12px; color: #70757a; margin: -12px 0 16px; padding: 0; }
+.gform .file-btn {
+  color: #1a73e8; background: #fff; border: 1px solid #dadce0; border-radius: 4px;
+  padding: 8px 16px; font-size: 14px; font-weight: 500; letter-spacing: .01em;
+}
+.gform .file-btn:hover { background: #f6fafe; }
+.gform .file-name { font-size: 14px; color: #202124; }
+.gform .error-msg { font-size: 12px; color: #d93025; margin-top: 8px; }
+.gform .card.invalid { border-color: #d93025; }
+.gform .actions { margin-top: 20px; padding: 0 2px; }
+.gform .submit { background: var(--accent); color: #fff; border-radius: 4px; padding: 0 18px; height: 36px; font-size: 14px; font-weight: 500; letter-spacing: .02em; }
+.gform .submit:hover { background: var(--accent-dark); box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.gform .clear { color: var(--accent); font-size: 14px; font-weight: 500; padding: 0 8px; height: 36px; background: transparent; border: 0; }
+.gform .clear:hover { background: rgba(87,134,53,.09); }
+.gform .success p { font-size: 14px; margin: 0 0 12px; }
+.gform .success .links a { color: #1a73e8; margin-right: 16px; font-size: 14px; }
+.gform .gfoot { text-align: left; color: #5f6368; font-size: 12px; margin-top: 20px; padding: 0 2px; }
+.gform .gfoot .center { text-align: center; margin: 18px 0 8px; }
+.gform .gfoot .logo { text-align: center; font-size: 22px; color: #5f6368; letter-spacing: .04em; margin: 12px 0 0; }
+.gform input.short { max-width: 50%; }
+@media (max-width: 520px) { .gform input.short { max-width: 100%; } }
+.gform .opt .other-input { padding: 4px 0; }

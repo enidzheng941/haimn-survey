@@ -4,25 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HAIMN Member Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header class="topbar"><div class="topbar-inner">
-  <a class="brand" href="index.html">HAIMN</a>
-  <nav aria-label="Main">
-    <a href="index.html">Home</a>
-    <a href="survey.html">Survey</a>
-    <a href="dashboard.html">My Dashboard</a>
-    <a href="networking.html">Networking</a>
-    <a href="request-help.html" aria-current="page">Get Help</a>
-  </nav>
-</div></header>
+<body class="gform">
 <main class="narrow">
   <form id="helpForm" novalidate>
-    <div class="card title">
-      <h1>HAIMN Member Form</h1>
-      <p class="muted">Tell us what you need and we will match you with the right HAIMN network.</p>
-      <p class="req-note">* Indicates required question</p>
+    <div class="card title hdr">
+      <div class="sect"><h1>HAIMN Member Form</h1>
+        <p class="desc">Tell us what you need and we will match you with the right HAIMN network.</p></div>
+      <div class="sect note">When you upload a file and submit this form, your name, email and the file are shared with the HAIMN team.</div>
+      <div class="sect"><p class="req-note">* Indicates required question</p></div>
     </div>
 
     <div class="card" data-required>
@@ -90,15 +83,18 @@
     <p id="formError" class="req-note" role="alert" hidden style="margin-top:12px">Please fix the highlighted questions and try again.</p>
   </form>
 
-  <div class="card success" id="thanks" hidden>
-    <h2>Thank you!</h2>
-    <p>Your request has been received. We will get back to you based on the priority you selected.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="dashboard.html">Go to my dashboard</a>
-      <a class="btn btn-ghost" href="networking.html">Open the networking hub</a>
+  <div class="card title hdr success" id="thanks" hidden>
+    <div class="sect"><h1>HAIMN Member Form</h1></div>
+    <div class="sect">
+      <p>Your response has been recorded. We will get back to you based on the priority you selected.</p>
+      <p class="links"><a href="dashboard.html">Go to my dashboard</a><a href="networking.html">Networking hub</a><a href="request-help.html">Submit another response</a></p>
     </div>
   </div>
-  <footer>HAIMN Member Form &middot; Please do not submit passwords through this form.</footer>
+  <footer class="gfoot">
+    <p>Never submit passwords through this form.</p>
+    <p class="center">This form was created for HAIMN. Your responses go to the HAIMN team.</p>
+    <div class="logo">HAIMN</div>
+  </footer>
 </main>
 <script src="config.js"></script>
 <script src="app.js"></script>
